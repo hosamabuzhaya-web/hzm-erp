@@ -12,6 +12,15 @@
     <title>ניהול מלאי BE</title>
     <script type="module" crossorigin src="/assets/index-Bck7ju4J.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-DAp1BdJl.css">
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+          for (let registration of registrations) {
+            registration.unregister();
+          }
+        });
+      }
+    </script>
   </head>
   <body>
     <!-- Redirect/Help for local file opening -->
