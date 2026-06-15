@@ -9,7 +9,7 @@ async function main() {
   const supabaseUrl = process.env.SUPABASE_URL || 'https://ajcmepmfbjfwgaeihdnt.supabase.co';
   const supabaseAnonKey = process.env.SUPABASE_ANON_KEY;
   const resendApiKey = process.env.RESEND_API_KEY;
-  const toEmail = process.env.TO_EMAIL || 'hosam.abuzhaya@gmail.com';
+  const toEmail = process.env.TO_EMAIL || 'hosam.abu.zhaya@gmail.com';
 
   if (!supabaseAnonKey) {
     console.error('Error: SUPABASE_ANON_KEY is required.');
