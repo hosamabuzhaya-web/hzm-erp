@@ -1,0 +1,34 @@
+name: Daily Orders Email Notification
+
+on:
+  schedule:
+    # Run every day at 5:00 UTC (8:00 AM Israel time DST / 7:00 AM Israel standard time)
+    - cron: '0 5 * * *'
+  workflow_dispatch:
+    # Allows manual triggering from the GitHub Actions UI for testing
+    inputs:
+      test_email:
+        description: 'Override recipient email for testing (optional)'
+        required: false
+        default: ''
+
+jobs:
+  send-report:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run Daily Orders Script
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL || 'https://ajcmepmfbjfwgaeihdnt.supabase.co' }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          TO_EMAIL: ${{ github.event.inputs.test_email || secrets.TO_EMAIL || 'hosam.abuzhaya@gmail.com' }}
+        run: node scripts/send_daily_orders.js
